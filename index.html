@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AURA // Finest Athletics & High-Performance Club</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="brand-logo">
+        <span class="logo-accent">AURA</span> ATHLETICS
+      </a>
+      <nav class="nav-links">
+        <a href="#tracker">Tracker</a>
+        <a href="#timer">HIIT Timer</a>
+        <a href="#exercises">Exercises</a>
+        <a href="#calculators">Calculators</a>
+        <a href="#classes">Classes</a>
+        <a href="#membership" class="btn btn-sm btn-accent">Join Club</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero-section">
+    <div class="hero-content">
+      <span class="badge">PRECISION HUMAN PERFORMANCE</span>
+      <h1 class="hero-title">ENGINEERED FOR THE UNCOMPROMISING.</h1>
+      <p class="hero-subtext">
+        Elite coaching, biomechanical equipment, and intelligent tracking tools designed to optimize strength, recovery, and conditioning.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#tracker" class="btn btn-accent">Start Active Session</a>
+        <a href="#timer" class="btn btn-outline">Launch Interval Timer</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Container -->
+  <main class="main-content">
+
+    <!-- Section: Workout Tracker -->
+    <section id="tracker" class="dashboard-section">
+      <div class="section-header">
+        <div>
+          <h2>ACTIVE SESSION TRACKER</h2>
+          <p>Log your working sets, volume, and reps with live metric totals.</p>
+        </div>
+        <div class="tracker-summary">
+          <div class="stat-badge">
+            <span class="stat-label">Total Volume</span>
+            <span class="stat-val" id="totalVolumeDisplay">0 kg</span>
+          </div>
+          <div class="stat-badge">
+            <span class="stat-label">Sets Done</span>
+            <span class="stat-val" id="completedSetsDisplay">0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tracker-card">
+        <div class="tracker-input-row">
+          <input type="text" id="exerciseNameInput" placeholder="Exercise Name (e.g. Barbell Squat)" />
+          <input type="number" id="exerciseWeightInput" placeholder="Weight (kg)" min="0" />
+          <input type="number" id="exerciseRepsInput" placeholder="Reps" min="1" />
+          <button id="addSetBtn" class="btn btn-accent">+ Log Set</button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="workout-table">
+            <thead>
+              <tr>
+                <th>Exercise</th>
+                <th>Weight (kg)</th>
+                <th>Reps</th>
+                <th>Volume</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="workoutTableBody">
+              <!-- Dynamically populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Interval HIIT Timer -->
+    <section id="timer" class="dashboard-section">
+      <div class="section-header">
+        <div>
+          <h2>HIGH-INTENSITY INTERVAL TIMER</h2>
+          <p>Work-to-rest interval countdown with sound triggers and visual rings.</p>
+        </div>
+      </div>
+
+      <div class="timer-card">
+        <div class="timer-display-wrap">
+          <svg class="progress-ring" width="260" height="260">
+            <circle class="ring-bg" stroke="#1f262e" stroke-width="8" fill="transparent" r="115" cx="130" cy="130"></circle>
+            <circle id="timerProgressRing" class="ring-indicator" stroke="#c6ff00" stroke-width="8" stroke-dasharray="722.56" stroke-dashoffset="0" fill="transparent" r="115" cx="130" cy="130"></circle>
+          </svg>
+          <div class="timer-digits-container">
+            <span id="timerPhaseBadge" class="timer-phase">WORK</span>
+            <span id="timerClock" class="timer-digits">00:45</span>
+            <span id="timerRoundCount" class="timer-round">Round 1 / 8</span>
+          </div>
+        </div>
+
+        <div class="timer-controls">
+          <button id="timerToggleBtn" class="btn btn-accent">Start Interval</button>
+          <button id="timerResetBtn" class="btn btn-outline">Reset</button>
+        </div>
+
+        <div class="timer-presets">
+          <button class="preset-btn" data-work="20" data-rest="10" data-rounds="8">Tabata (20s/10s)</button>
+          <button class="preset-btn" data-work="45" data-rest="15" data-rounds="6">HIIT Standard (45s/15s)</button>
+          <button class="preset-btn" data-work="60" data-rest="90" data-rounds="5">Power Rest (60s/90s)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Exercise Library -->
+    <section id="exercises" class="dashboard-section">
+      <div class="section-header">
+        <div>
+          <h2>BIOMECHANICS & MOVEMENT LIBRARY</h2>
+          <p>Filter movements and target specific kinetic muscle chains.</p>
+        </div>
+        <input type="text" id="exerciseSearchInput" class="search-input" placeholder="Search exercises..." />
+      </div>
+
+      <div class="filter-pills" id="categoryFilterContainer">
+        <button class="pill-btn active" data-filter="all">All</button>
+        <button class="pill-btn" data-filter="Chest">Chest</button>
+        <button class="pill-btn" data-filter="Back">Back</button>
+        <button class="pill-btn" data-filter="Legs">Legs</button>
+        <button class="pill-btn" data-filter="Shoulders">Shoulders</button>
+      </div>
+
+      <div class="exercise-grid" id="exerciseGrid">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- Section: Fitness Calculators -->
+    <section id="calculators" class="dashboard-section">
+      <div class="section-header">
+        <div>
+          <h2>PERFORMANCE CALCULATORS</h2>
+          <p>Scientific estimators for strength outputs and daily energy balance.</p>
+        </div>
+      </div>
+
+      <div class="calc-grid">
+        <!-- 1RM Estimator -->
+        <div class="calc-card">
+          <h3>One Rep Max (1RM) Estimator</h3>
+          <p class="calc-desc">Epley Biomechanical Formula: <code>Weight &times; (1 + Reps/30)</code></p>
+          <div class="calc-form">
+            <label>Weight Lifted (kg)
+              <input type="number" id="rmWeight" value="100" />
+            </label>
+            <label>Reps Completed
+              <input type="number" id="rmReps" value="5" />
+            </label>
+            <button id="calc1RMBtn" class="btn btn-sm btn-accent">Calculate 1RM</button>
+          </div>
+          <div class="calc-result" id="rmResultBox">
+            <span class="result-number" id="estimated1RM">116.7 kg</span>
+            <span class="result-sub">Estimated Peak Single Rep</span>
+          </div>
+        </div>
+
+        <!-- TDEE Calculator -->
+        <div class="calc-card">
+          <h3>TDEE & Macro Breakdown</h3>
+          <p class="calc-desc">Mifflin-St Jeor Energy Expenditure Profile.</p>
+          <div class="calc-form">
+            <label>Weight (kg)
+              <input type="number" id="tdeeWeight" value="75" />
+            </label>
+            <label>Height (cm)
+              <input type="number" id="tdeeHeight" value="178" />
+            </label>
+            <label>Age
+              <input type="number" id="tdeeAge" value="24" />
+            </label>
+            <button id="calcTDEEBtn" class="btn btn-sm btn-accent">Calculate Energy</button>
+          </div>
+          <div class="calc-result" id="tdeeResultBox">
+            <span class="result-number" id="tdeeDisplay">2,425 kcal</span>
+            <span class="result-sub">Maintenance Baseline Target</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Classes & Booking -->
+    <section id="classes" class="dashboard-section">
+      <div class="section-header">
+        <div>
+          <h2>CLUB SCHEDULE & SESSIONS</h2>
+          <p>Reserve access to small-group performance classes.</p>
+        </div>
+      </div>
+
+      <div class="classes-grid">
+        <div class="class-card">
+          <div class="class-head">
+            <span class="class-time">07:00 AM &bull; 60 Min</span>
+            <span class="badge badge-accent">Hypertrophy</span>
+          </div>
+          <h3>Barbell Structural Mastery</h3>
+          <p>Compound biomechanics: Deep squats, deadlift bracing, and axial load management.</p>
+          <button class="btn btn-outline btn-block book-class-btn" data-class="Barbell Structural Mastery">Reserve Spot</button>
+        </div>
+
+        <div class="class-card">
+          <div class="class-head">
+            <span class="class-time">12:30 PM &bull; 45 Min</span>
+            <span class="badge badge-accent">Conditioning</span>
+          </div>
+          <h3>Metabolic Engine & SkiErg</h3>
+          <p>Zone-4 threshold cardiovascular work with sprint sleds and curved treadmills.</p>
+          <button class="btn btn-outline btn-block book-class-btn" data-class="Metabolic Engine & SkiErg">Reserve Spot</button>
+        </div>
+
+        <div class="class-card">
+          <div class="class-head">
+            <span class="class-time">06:00 PM &bull; 50 Min</span>
+            <span class="badge badge-accent">Recovery</span>
+          </div>
+          <h3>Contrast Therapy & Mobility</h3>
+          <p>Myofascial decompression, loaded joint rotations, cold plunge immersion.</p>
+          <button class="btn btn-outline btn-block book-class-btn" data-class="Contrast Therapy & Mobility">Reserve Spot</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Membership -->
+    <section id="membership" class="dashboard-section">
+      <div class="section-header center">
+        <h2>MEMBERSHIP TIERS</h2>
+        <p>Unrestricted access to state-of-the-art facilities and biometric guidance.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>FOUNDATIONAL</h3>
+          <div class="price-val">$89<span>/mo</span></div>
+          <ul class="price-list">
+            <li>Uncapped floor & open gym access</li>
+            <li>Full equipment biomechanical orientation</li>
+            <li>Digital AURA Workout & Log Sync</li>
+          </ul>
+          <button class="btn btn-outline btn-block join-plan-btn" data-plan="Foundational">Select Plan</button>
+        </div>
+
+        <div class="price-card featured">
+          <span class="pill-highlight">MOST REQUESTED</span>
+          <h3>BLACK TIER</h3>
+          <div class="price-val">$149<span>/mo</span></div>
+          <ul class="price-list">
+            <li>All Foundational perks included</li>
+            <li>Unlimited group classes & HIIT studios</li>
+            <li>Weekly cold plunge & sauna contrast suite</li>
+            <li>Monthly DEXA scan & body composition report</li>
+          </ul>
+          <button class="btn btn-accent btn-block join-plan-btn" data-plan="Black Tier">Select Plan</button>
+        </div>
+
+        <div class="price-card">
+          <h3>APEX ELITE</h3>
+          <div class="price-val">$249<span>/mo</span></div>
+          <ul class="price-list">
+            <li>Dedicated 1-on-1 Biomechanics Coach</li>
+            <li>Private locker room & garment service</li>
+            <li>Tailored weekly nutrition protocol</li>
+            <li>24/7 Priority biometric telemetry review</li>
+          </ul>
+          <button class="btn btn-outline btn-block join-plan-btn" data-plan="Apex Elite">Select Plan</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="toast">Notification</div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
